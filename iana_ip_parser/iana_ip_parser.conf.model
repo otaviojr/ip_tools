@@ -1,0 +1,16 @@
+{
+  "files": [
+    {"name": "delegated-apnic-extended-latest", "url": "ftp://ftp.apnic.net/public/stats/apnic/delegated-apnic-extended-latest"},
+    {"name": "delegated-afrinic-extended-latest", "url": "ftp://ftp.afrinic.net/stats/afrinic/delegated-afrinic-extended-latest"},
+    {"name": "delegated-lacnic-extended-latest", "url": "ftp://ftp.lacnic.net/pub/stats/lacnic/delegated-lacnic-extended-latest"},
+    {"name": "delegated-arin-extended-latest", "url": "ftp://ftp.arin.net/pub/stats/arin/delegated-arin-extended-latest"},
+    {"name": "delegated-ripencc-extended-latest", "url": "https://ftp.ripe.net/pub/stats/ripencc/delegated-ripencc-extended-latest"}
+  ],
+  "download_dir": "./tmp",
+  "database": {
+    "host": "tcp(127.0.0.1)",
+    "username": "",
+    "password": "",
+    "database_name": "ip_database"
+  }
+}
