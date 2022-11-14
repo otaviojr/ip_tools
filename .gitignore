@@ -3,3 +3,5 @@ node_modules/
 iana_ip_parser/tmp/
 iana_ip_parser/iana_ip_parser.conf
 iana_ip_parser/iana_ip_parser.log
+iana_ip_parser/parser
+
