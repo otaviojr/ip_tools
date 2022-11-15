@@ -36,7 +36,7 @@ type Record struct {
 	CountryCode string    `json:"country_code"`
 	Type        string    `json:"type"`
 	Start       string    `json:"start"`
-	Value       string    `json:"value"`
+	Value       int64     `json:"value"`
 	Date        time.Time `json:"date"`
 	Status      string    `json:"status"`
 }
@@ -261,28 +261,29 @@ func main() {
 				//}
 			} else {
 				date, err := time.Parse("20060102", lineArr[5])
+				value, err := strconv.ParseInt(strings.TrimSpace(lineArr[4]), 10, 32)
 
 				var lineObj Record
 				lineObj = Record{
-					Registry:    lineArr[0],
-					CountryCode: lineArr[1],
-					Type:        lineArr[2],
-					Start:       lineArr[3],
-					Value:       lineArr[4],
+					Registry:    strings.TrimSpace(lineArr[0]),
+					CountryCode: strings.TrimSpace(lineArr[1]),
+					Type:        strings.TrimSpace(lineArr[2]),
+					Start:       strings.TrimSpace(lineArr[3]),
+					Value:       value,
 					Date:        date,
-					Status:      lineArr[6],
+					Status:      strings.TrimSpace(lineArr[6]),
 				}
 
 				var ip_range_start net.IP
 				var ip_range_end net.IP
 
 				if lineObj.Type == "ipv6" {
-					ip_range_start, ip_range_end = ipRange(lineObj.Start + "/" + lineObj.Value)
+					ip_range_start, ip_range_end = ipRange(lineObj.Start + "/" + strconv.FormatInt(lineObj.Value, 10))
 					fmt.Println("Start Range:", Inet6_Aton(ip_range_start))
 					fmt.Println("End Range:", Inet6_Aton(ip_range_end))
 				} else if lineObj.Type == "ipv4" {
 					ip_range_start = net.ParseIP(lineObj.Start)
-					len, _ := strconv.Atoi(lineObj.Value)
+					len := lineObj.Value
 					ip_range_end = nextIP4(ip_range_start, uint(len))
 					fmt.Println("Start Range:", Inet_Aton(ip_range_start))
 					fmt.Println("End Range:", Inet_Aton(ip_range_end))
